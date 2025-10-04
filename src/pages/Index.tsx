@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Layout } from "@/components/Layout";
 import { BookingForm } from "@/components/BookingForm";
+import { BookingPopup } from "@/components/BookingPopup";
 import { FeaturesSection } from "@/components/FeaturesSection";
 import { AirportRates } from "@/components/AirportRates";
 import { Phone, MapPin, Clock } from "lucide-react";
@@ -9,6 +10,7 @@ import heroImage from "@/assets/hero-taxi.jpg";
 const Index = () => {
   return (
     <Layout>
+      <BookingPopup />
       {/* Hero Section */}
       <section className="relative h-[600px] flex items-center justify-center overflow-hidden">
         <div
