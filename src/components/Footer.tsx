@@ -1,4 +1,4 @@
-import { MapPin, Phone, Mail } from "lucide-react";
+import { MapPin, Phone, Mail, MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export const Footer = () => {
@@ -43,8 +43,19 @@ export const Footer = () => {
               </li>
               <li className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-secondary flex-shrink-0" />
-                <a href="tel:01443123456" className="hover:text-secondary transition-colors">
-                  01443 123 456
+                <a href="tel:+4407469073386" className="hover:text-secondary transition-colors">
+                  07469 073386
+                </a>
+              </li>
+              <li className="flex items-center space-x-3">
+                <MessageCircle className="h-5 w-5 text-secondary flex-shrink-0" />
+                <a 
+                  href="https://wa.me/4407469073386?text=Book%20Taxi%20Now" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-secondary transition-colors"
+                >
+                  WhatsApp
                 </a>
               </li>
               <li className="flex items-center space-x-3">

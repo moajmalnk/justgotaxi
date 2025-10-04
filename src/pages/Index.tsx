@@ -30,10 +30,10 @@ const Index = () => {
             Professional, safe, and comfortable transportation available 24/7
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in">
-            <a href="tel:01443123456">
+            <a href="tel:+4407469073386">
               <Button variant="hero" size="lg">
                 <Phone className="h-5 w-5" />
-                Call Now: 01443 123 456
+                Call Now: 07469 073386
               </Button>
             </a>
             <Button variant="outline" size="lg" className="bg-primary-foreground/10 backdrop-blur-sm border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
@@ -121,10 +121,10 @@ const Index = () => {
           <p className="text-xl mb-8 max-w-2xl mx-auto">
             Get in touch today for reliable, professional taxi service in Pontypridd and South Wales
           </p>
-          <a href="tel:01443123456">
+          <a href="tel:+4407469073386">
             <Button variant="secondary" size="lg" className="text-lg">
               <Phone className="h-5 w-5" />
-              Call Now: 01443 123 456
+              Call Now: 07469 073386
             </Button>
           </a>
         </div>

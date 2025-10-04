@@ -1,6 +1,6 @@
 import { Layout } from "@/components/Layout";
 import { ContactForm } from "@/components/ContactForm";
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, MessageCircle } from "lucide-react";
 import { Helmet } from "react-helmet";
 
 const Contact = () => {
@@ -48,8 +48,25 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">Phone</h3>
-                    <a href="tel:01443123456" className="text-secondary hover:text-secondary/80 transition-colors">
-                      01443 123456
+                    <a href="tel:+4407469073386" className="text-secondary hover:text-secondary/80 transition-colors">
+                      07469 073386
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4 p-4 rounded-lg bg-card border border-border hover:shadow-elegant transition-all">
+                  <div className="p-3 rounded-full bg-secondary/20">
+                    <MessageCircle className="h-6 w-6 text-secondary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-1">WhatsApp</h3>
+                    <a 
+                      href="https://wa.me/4407469073386?text=Book%20Taxi%20Now" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-secondary hover:text-secondary/80 transition-colors"
+                    >
+                      Chat with us
                     </a>
                   </div>
                 </div>

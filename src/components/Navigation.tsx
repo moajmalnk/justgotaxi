@@ -39,7 +39,7 @@ export const Navigation = () => {
                 {link.label}
               </Link>
             ))}
-            <a href="tel:01443123456" className="flex items-center space-x-2">
+            <a href="tel:+4407469073386" className="flex items-center space-x-2">
               <Button variant="secondary" size="sm">
                 <Phone className="h-4 w-4" />
                 <span>Call Now</span>
@@ -73,7 +73,7 @@ export const Navigation = () => {
                   {link.label}
                 </Link>
               ))}
-              <a href="tel:01443123456" className="px-4">
+              <a href="tel:+4407469073386" className="px-4">
                 <Button variant="secondary" size="sm" className="w-full">
                   <Phone className="h-4 w-4" />
                   <span>Call Now</span>

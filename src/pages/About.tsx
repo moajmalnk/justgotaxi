@@ -149,10 +149,10 @@ const About = () => {
           <p className="text-xl mb-8 max-w-2xl mx-auto">
             Join thousands of satisfied customers who trust Just Go Taxi for their transportation needs
           </p>
-          <a href="tel:01443123456">
+          <a href="tel:+4407469073386">
             <Button variant="secondary" size="lg" className="text-lg">
               <Phone className="h-5 w-5" />
-              Call Now: 01443 123 456
+              Call Now: 07469 073386
             </Button>
           </a>
         </div>

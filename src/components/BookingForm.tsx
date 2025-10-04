@@ -3,7 +3,7 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import { Calendar, MapPin, Users, Clock } from "lucide-react";
+import { Calendar, MapPin, Users, Clock, MessageCircle } from "lucide-react";
 import { toast } from "sonner";
 
 export const BookingForm = () => {
@@ -129,9 +129,36 @@ export const BookingForm = () => {
             />
           </div>
 
-          <Button type="submit" variant="hero" size="lg" className="w-full">
-            Get Quote
-          </Button>
+          <div className="space-y-3">
+            <Button type="submit" variant="hero" size="lg" className="w-full">
+              Get Quote
+            </Button>
+            
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-card px-2 text-muted-foreground">Or book via</span>
+              </div>
+            </div>
+
+            <Button
+              type="button"
+              variant="outline"
+              size="lg"
+              className="w-full border-[#25D366] text-[#25D366] hover:bg-[#25D366] hover:text-white"
+              onClick={() => {
+                const message = encodeURIComponent(
+                  `Book Taxi Now\n\nFrom: ${formData.pickupLocation || 'Not specified'}\nTo: ${formData.dropoffLocation || 'Not specified'}\nDate: ${formData.date || 'Not specified'}\nTime: ${formData.time || 'Not specified'}\nPassengers: ${formData.passengers}`
+                );
+                window.open(`https://wa.me/4407469073386?text=${message}`, '_blank');
+              }}
+            >
+              <MessageCircle className="h-5 w-5" />
+              Book via WhatsApp
+            </Button>
+          </div>
         </form>
       </CardContent>
     </Card>
