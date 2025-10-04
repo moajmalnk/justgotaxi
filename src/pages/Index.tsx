@@ -3,6 +3,8 @@ import { Layout } from "@/components/Layout";
 import { BookingForm } from "@/components/BookingForm";
 import { BookingPopup } from "@/components/BookingPopup";
 import { FeaturesSection } from "@/components/FeaturesSection";
+import { ServicesShowcase } from "@/components/ServicesShowcase";
+import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { AirportRates } from "@/components/AirportRates";
 import { Phone, MapPin, Clock } from "lucide-react";
 import heroImage from "@/assets/hero-taxi.jpg";
@@ -108,6 +110,12 @@ const Index = () => {
 
       {/* Features */}
       <FeaturesSection />
+
+      {/* Services Showcase */}
+      <ServicesShowcase />
+
+      {/* Testimonials */}
+      <TestimonialsSection />
 
       {/* Airport Rates */}
       <AirportRates />
