@@ -8,13 +8,14 @@ import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { AirportRates } from "@/components/AirportRates";
 import { Phone, MapPin, Clock } from "lucide-react";
 import heroImage from "@/assets/hero-taxi.jpg";
+import fleetImage from "@/assets/fleet-taxi.jpg";
 
 const Index = () => {
   return (
     <Layout>
       <BookingPopup />
       {/* Hero Section */}
-      <section className="relative h-[600px] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[500px] sm:h-[600px] lg:h-[700px] flex items-center justify-center overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${heroImage})` }}
@@ -23,23 +24,30 @@ const Index = () => {
         </div>
 
         <div className="relative z-10 container mx-auto px-4 text-center text-primary-foreground">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
-            Your Reliable Taxi Service
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 animate-fade-in drop-shadow-2xl leading-tight">
+            <span className="text-white drop-shadow-lg">Your Reliable Taxi Service</span>
             <br />
-            <span className="text-secondary">in South Wales</span>
+            <span className="text-secondary drop-shadow-lg">in South Wales and Pontypridd</span>
           </h1>
-          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto animate-fade-in">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl mb-6 sm:mb-8 max-w-3xl mx-auto animate-fade-in text-white drop-shadow-lg bg-black/40 px-3 sm:px-4 py-2 sm:py-3 rounded-lg backdrop-blur-sm">
             Professional, safe, and comfortable transportation available 24/7
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in">
-            <a href="tel:+4407469073386">
-              <Button variant="hero" size="lg">
-                <Phone className="h-5 w-5" />
-                Call Now: 07469 073386
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center animate-fade-in px-2">
+            <a href="tel:+4407469073386" className="w-full sm:w-auto">
+              <Button variant="hero" size="lg" className="w-full sm:w-auto text-sm sm:text-base px-4 sm:px-6 py-3 sm:py-4">
+                <Phone className="h-4 w-4 sm:h-5 sm:w-5" />
+                <span className="ml-2">Call Now: 07469 073386</span>
               </Button>
             </a>
-            <Button variant="outline" size="lg" className="bg-primary-foreground/10 backdrop-blur-sm border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
-              Learn More
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="w-full sm:w-auto bg-primary-foreground/10 backdrop-blur-sm border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary text-sm sm:text-base px-4 sm:px-6 py-3 sm:py-4"
+              onClick={() => {
+                document.getElementById('booking-section')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              Book Taxi Now
             </Button>
           </div>
         </div>
@@ -66,43 +74,80 @@ const Index = () => {
       </section>
 
       {/* Mission & Booking Section */}
-      <section className="py-16">
+      <section id="booking-section" className="py-16">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             <div className="animate-fade-in">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Welcome to Just Go Taxi
-              </h2>
-              <p className="text-lg text-muted-foreground mb-4">
-                At Just Go Taxi, our mission is simple: to provide safe, reliable, and comfortable transportation for everyone in Pontypridd and throughout South Wales.
-              </p>
-              <p className="text-lg text-muted-foreground mb-6">
-                With over 15 years of experience serving our community, we pride ourselves on punctuality, professionalism, and putting our customers first. Whether you need an airport transfer, a ride to an important meeting, or transportation for a night out, we're here for you 24 hours a day, 7 days a week.
-              </p>
-              <div className="space-y-4">
-                <div className="flex items-start space-x-3">
-                  <Clock className="h-6 w-6 text-secondary mt-1 flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold text-lg mb-1">24/7 Service</h3>
-                    <p className="text-muted-foreground">
-                      Day or night, we're always ready to get you where you need to go.
-                    </p>
+              <div className="mb-8">
+                <div className="inline-block bg-secondary/10 px-4 py-2 rounded-full mb-4">
+                  <span className="text-secondary font-semibold text-sm uppercase tracking-wide">
+                    Your Trusted Partner
+                  </span>
+                </div>
+                <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 leading-tight whitespace-nowrap">
+                  Welcome to <span className="text-secondary">Just Go Taxi</span>
+                </h2>
+                <div className="w-24 h-1 bg-secondary rounded-full mb-8"></div>
+              </div>
+
+              <div className="space-y-6 mb-10">
+                <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed font-light">
+                  At Just Go Taxi, our mission is simple: to provide{" "}
+                  <span className="text-foreground font-semibold">safe, reliable, and comfortable</span>{" "}
+                  transportation for everyone in Pontypridd and throughout South Wales. We are available 24/7 for all your transportation needs.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="group">
+                  <div className="flex items-start space-x-4 p-6 rounded-xl bg-gradient-to-br from-secondary/5 to-secondary/10 hover:from-secondary/10 hover:to-secondary/15 transition-all duration-300 border border-secondary/10">
+                    <div className="flex-shrink-0">
+                      <div className="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center group-hover:bg-secondary/30 transition-colors">
+                        <Clock className="h-6 w-6 text-secondary" />
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-xl mb-2 text-foreground">24/7 Service</h3>
+                      <p className="text-muted-foreground leading-relaxed">
+                        Day or night, we're always ready to get you where you need to go, whenever you need us.
+                      </p>
+                    </div>
                   </div>
                 </div>
-                <div className="flex items-start space-x-3">
-                  <MapPin className="h-6 w-6 text-secondary mt-1 flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold text-lg mb-1">Local & Long Distance</h3>
-                    <p className="text-muted-foreground">
-                      From quick local trips to airport transfers across the UK.
-                    </p>
+
+                <div className="group">
+                  <div className="flex items-start space-x-4 p-6 rounded-xl bg-gradient-to-br from-secondary/5 to-secondary/10 hover:from-secondary/10 hover:to-secondary/15 transition-all duration-300 border border-secondary/10">
+                    <div className="flex-shrink-0">
+                      <div className="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center group-hover:bg-secondary/30 transition-colors">
+                        <MapPin className="h-6 w-6 text-secondary" />
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-xl mb-2 text-foreground">Local & Long Distance</h3>
+                      <p className="text-muted-foreground leading-relaxed">
+                        From quick local trips to airport transfers across the UK - we cover it all.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
             <div className="animate-fade-in" style={{ animationDelay: "200ms" }}>
-              <BookingForm />
+              <div className="relative">
+                {/* Background Image */}
+                <div className="absolute inset-0 rounded-lg overflow-hidden">
+                  <img 
+                    src={fleetImage} 
+                    alt="Professional taxi fleet" 
+                    className="w-full h-full object-cover opacity-10"
+                  />
+                </div>
+                {/* Booking Form */}
+                <div className="relative z-10 bg-white rounded-lg p-6 shadow-lg">
+                  <BookingForm />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -127,7 +172,7 @@ const Index = () => {
             Ready to Book Your Ride?
           </h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Get in touch today for reliable, professional taxi service in Pontypridd and South Wales
+            Get in touch today for reliable, professional taxi service in South Wales and Pontypridd
           </p>
           <a href="tel:+4407469073386">
             <Button variant="secondary" size="lg" className="text-lg">

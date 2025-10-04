@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favicon Generator - Just Go Taxi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .favicon-preview {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+        .size {
+            text-align: center;
+        }
+        .size h4 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        canvas {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .download-btn {
+            background: #F59E0B;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        .download-btn:hover {
+            background: #D97706;
+        }
+        .instructions {
+            background: #e7f3ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .instructions h3 {
+            color: #1e40af;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚕 Just Go Taxi - Custom Favicon Generator</h1>
+        <p>This tool will help you generate a proper ICO favicon from our SVG design.</p>
+        
+        <div class="favicon-preview">
+            <div class="size">
+                <h4>16x16</h4>
+                <canvas id="canvas16" width="16" height="16"></canvas>
+            </div>
+            <div class="size">
+                <h4>32x32</h4>
+                <canvas id="canvas32" width="32" height="32"></canvas>
+            </div>
+            <div class="size">
+                <h4>48x48</h4>
+                <canvas id="canvas48" width="48" height="48"></canvas>
+            </div>
+        </div>
+        
+        <div>
+            <button class="download-btn" onclick="downloadFavicon(16)">Download 16x16 PNG</button>
+            <button class="download-btn" onclick="downloadFavicon(32)">Download 32x32 PNG</button>
+            <button class="download-btn" onclick="downloadFavicon(48)">Download 48x48 PNG</button>
+        </div>
+        
+        <div class="instructions">
+            <h3>📋 Instructions:</h3>
+            <ol>
+                <li>Click the download buttons above to get PNG versions of your favicon</li>
+                <li>Use an online ICO converter like <a href="https://converticon.com/" target="_blank">ConvertIcon</a> to convert the PNG to ICO format</li>
+                <li>Replace the old favicon.ico in your public folder with the new one</li>
+                <li>Clear your browser cache to see the new favicon</li>
+            </ol>
+        </div>
+        
+        <div class="instructions">
+            <h3>🎨 Alternative: Use SVG Favicon</h3>
+            <p>The SVG favicon is already created and will work in modern browsers. If you want to support older browsers, use the ICO version.</p>
+            <p><strong>Current setup:</strong> Your site now uses <code>/favicon.svg</code> as the primary favicon with fallback to <code>/favicon.ico</code></p>
+        </div>
+    </div>
+
+    <script>
+        // Draw the taxi favicon
+        function drawFavicon(canvas, size) {
+            const ctx = canvas.getContext('2d');
+            const scale = size / 32; // Scale factor based on 32x32 base design
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, size, size);
+            
+            // Background circle
+            ctx.fillStyle = '#F59E0B';
+            ctx.beginPath();
+            ctx.arc(size/2, size/2, size/2, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Taxi car body - more modern rounded shape
+            ctx.fillStyle = 'white';
+            
+            // Main body
+            ctx.beginPath();
+            ctx.moveTo(8 * scale, 14 * scale);
+            ctx.lineTo(8 * scale, 20 * scale);
+            ctx.arc(10 * scale, 20 * scale, 2 * scale, Math.PI, Math.PI/2);
+            ctx.lineTo(12 * scale, 22 * scale);
+            ctx.arc(12 * scale, 21 * scale, 1 * scale, Math.PI/2, 0);
+            ctx.lineTo(13 * scale, 20 * scale);
+            ctx.lineTo(19 * scale, 20 * scale);
+            ctx.lineTo(19 * scale, 21 * scale);
+            ctx.arc(19 * scale, 21 * scale, 1 * scale, Math.PI, Math.PI/2);
+            ctx.lineTo(20 * scale, 22 * scale);
+            ctx.arc(22 * scale, 20 * scale, 2 * scale, Math.PI/2, 0);
+            ctx.lineTo(24 * scale, 20 * scale);
+            ctx.lineTo(24 * scale, 14 * scale);
+            ctx.arc(22 * scale, 14 * scale, 2 * scale, 0, Math.PI/2);
+            ctx.lineTo(20 * scale, 12 * scale);
+            ctx.lineTo(20 * scale, 10 * scale);
+            ctx.arc(18 * scale, 10 * scale, 2 * scale, Math.PI/2, Math.PI);
+            ctx.lineTo(14 * scale, 8 * scale);
+            ctx.arc(14 * scale, 10 * scale, 2 * scale, Math.PI, 3*Math.PI/2);
+            ctx.lineTo(12 * scale, 10 * scale);
+            ctx.lineTo(12 * scale, 12 * scale);
+            ctx.arc(10 * scale, 12 * scale, 2 * scale, 0, Math.PI/2);
+            ctx.lineTo(8 * scale, 14 * scale);
+            ctx.fill();
+            
+            // Car roof
+            ctx.fillRect(11 * scale, 10 * scale, 10 * scale, 4 * scale);
+            
+            // Wheels
+            ctx.fillStyle = '#1F2937';
+            ctx.beginPath();
+            ctx.arc(11 * scale, 21 * scale, 2.5 * scale, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(21 * scale, 21 * scale, 2.5 * scale, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Wheel centers
+            ctx.fillStyle = 'white';
+            ctx.beginPath();
+            ctx.arc(11 * scale, 21 * scale, 1 * scale, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(21 * scale, 21 * scale, 1 * scale, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Taxi sign
+            ctx.fillStyle = '#1F2937';
+            ctx.fillRect(12 * scale, 7 * scale, 8 * scale, 3 * scale);
+            ctx.fillStyle = '#F59E0B';
+            ctx.fillRect(13 * scale, 6.5 * scale, 6 * scale, 4 * scale);
+            
+            // Headlights
+            ctx.fillStyle = '#FEF3C7';
+            ctx.beginPath();
+            ctx.arc(24.5 * scale, 14 * scale, 1 * scale, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(24.5 * scale, 18 * scale, 1 * scale, 0, 2 * Math.PI);
+            ctx.fill();
+        }
+        
+        // Generate all sizes
+        drawFavicon(document.getElementById('canvas16'), 16);
+        drawFavicon(document.getElementById('canvas32'), 32);
+        drawFavicon(document.getElementById('canvas48'), 48);
+        
+        // Download function
+        function downloadFavicon(size) {
+            const canvas = document.getElementById(`canvas${size}`);
+            const link = document.createElement('a');
+            link.download = `favicon-${size}x${size}.png`;
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+    </script>
+</body>
+</html>

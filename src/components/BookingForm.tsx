@@ -3,6 +3,8 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { CustomCalendar } from "./ui/custom-calendar";
+import { CustomTimePicker } from "./ui/custom-time-picker";
 import { Calendar, MapPin, Users, Clock, MessageCircle } from "lucide-react";
 import { toast } from "sonner";
 
@@ -24,10 +26,38 @@ export const BookingForm = () => {
       return;
     }
 
-    // In a real application, this would send data to a booking API
-    toast.success("Booking request received! We'll contact you shortly.");
+    // Format date for display
+    const formattedDate = formData.date ? new Date(formData.date).toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    }) : 'Not specified';
+
+    // Format time for display (convert from 24h to 12h format)
+    const formatTime = (time24: string) => {
+      if (!time24) return 'Not specified';
+      const [hours, minutes] = time24.split(':');
+      const hour = parseInt(hours);
+      const ampm = hour >= 12 ? 'PM' : 'AM';
+      const hour12 = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
+      return `${hour12}:${minutes} ${ampm}`;
+    };
+
+    // Create WhatsApp message
+    const message = encodeURIComponent(
+      `🚕 *Just Go Taxi Booking Request*\n\n` +
+      `📍 *Pickup Location:* ${formData.pickupLocation}\n` +
+      `🎯 *Dropoff Location:* ${formData.dropoffLocation}\n` +
+      `📅 *Date:* ${formattedDate}\n` +
+      `🕐 *Time:* ${formatTime(formData.time)}\n` +
+      `👥 *Passengers:* ${formData.passengers}\n\n` +
+      `Please confirm availability and provide quote. Thank you!`
+    );
+
+    // Open WhatsApp
+    window.open(`https://wa.me/4407469073386?text=${message}`, '_blank');
     
-    // Reset form
+    // Reset form after successful submission
     setFormData({
       pickupLocation: "",
       dropoffLocation: "",
@@ -35,12 +65,14 @@ export const BookingForm = () => {
       time: "",
       passengers: "1",
     });
+
+    toast.success("Redirecting to WhatsApp...");
   };
 
   return (
     <Card className="shadow-elegant">
       <CardHeader>
-        <CardTitle className="text-2xl">Book Your Ride</CardTitle>
+        <CardTitle className="text-2xl text-center">Book Your Ride</CardTitle>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -84,14 +116,10 @@ export const BookingForm = () => {
                 <Calendar className="h-4 w-4 text-secondary" />
                 <span>Date *</span>
               </Label>
-              <Input
-                id="date"
-                type="date"
+              <CustomCalendar
                 value={formData.date}
-                onChange={(e) =>
-                  setFormData({ ...formData, date: e.target.value })
-                }
-                required
+                onChange={(date) => setFormData({ ...formData, date })}
+                placeholder="Pick a date"
               />
             </div>
 
@@ -100,14 +128,10 @@ export const BookingForm = () => {
                 <Clock className="h-4 w-4 text-secondary" />
                 <span>Time *</span>
               </Label>
-              <Input
-                id="time"
-                type="time"
+              <CustomTimePicker
                 value={formData.time}
-                onChange={(e) =>
-                  setFormData({ ...formData, time: e.target.value })
-                }
-                required
+                onChange={(time) => setFormData({ ...formData, time })}
+                placeholder="Select time"
               />
             </div>
           </div>
@@ -129,36 +153,10 @@ export const BookingForm = () => {
             />
           </div>
 
-          <div className="space-y-3">
-            <Button type="submit" variant="hero" size="lg" className="w-full">
-              Get Quote
-            </Button>
-            
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t" />
-              </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-card px-2 text-muted-foreground">Or book via</span>
-              </div>
-            </div>
-
-            <Button
-              type="button"
-              variant="outline"
-              size="lg"
-              className="w-full border-[#25D366] text-[#25D366] hover:bg-[#25D366] hover:text-white"
-              onClick={() => {
-                const message = encodeURIComponent(
-                  `Book Taxi Now\n\nFrom: ${formData.pickupLocation || 'Not specified'}\nTo: ${formData.dropoffLocation || 'Not specified'}\nDate: ${formData.date || 'Not specified'}\nTime: ${formData.time || 'Not specified'}\nPassengers: ${formData.passengers}`
-                );
-                window.open(`https://wa.me/4407469073386?text=${message}`, '_blank');
-              }}
-            >
-              <MessageCircle className="h-5 w-5" />
-              Book via WhatsApp
-            </Button>
-          </div>
+          <Button type="submit" variant="hero" size="lg" className="w-full">
+            <MessageCircle className="h-5 w-5 mr-2" />
+            Get Quote via WhatsApp
+          </Button>
         </form>
       </CardContent>
     </Card>
