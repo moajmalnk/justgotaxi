@@ -6,6 +6,8 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { Send } from "lucide-react";
 import { z } from "zod";
+import emailjs from "@emailjs/browser";
+import { EMAIL_CONFIG } from "@/config/email";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
@@ -41,8 +43,34 @@ export const ContactForm = () => {
     try {
       const validatedData = contactSchema.parse(formData);
 
-      // Placeholder for actual submission logic
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // Initialize EmailJS
+      emailjs.init(EMAIL_CONFIG.publicKey);
+
+      // Prepare template parameters
+      const templateParams = {
+        from_name: validatedData.name,
+        from_email: validatedData.email,
+        phone: validatedData.phone,
+        message: validatedData.message,
+        to_email: EMAIL_CONFIG.toEmail,
+        reply_to: validatedData.email,
+        time: new Date().toLocaleString('en-GB', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+          timeZone: 'Europe/London'
+        }),
+      };
+
+      // Send email using EmailJS
+      await emailjs.send(
+        EMAIL_CONFIG.serviceId,
+        EMAIL_CONFIG.templateId,
+        templateParams
+      );
 
       toast({
         title: "Message Sent!",
@@ -70,9 +98,10 @@ export const ContactForm = () => {
           variant: "destructive",
         });
       } else {
+        console.error("Email sending error:", error);
         toast({
           title: "Error",
-          description: "Something went wrong. Please try again.",
+          description: "Failed to send message. Please try again or contact us directly.",
           variant: "destructive",
         });
       }

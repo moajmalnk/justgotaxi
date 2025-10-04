@@ -30,7 +30,15 @@ export const BookingPopup = () => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto scrollbar-hide">
-        
+        <DialogHeader>
+          <DialogTitle className="flex items-center gap-2">
+            <Car className="h-5 w-5" />
+            Book Your Taxi Ride
+          </DialogTitle>
+          <DialogDescription>
+            Fill out the form below to book your taxi ride with JustGo Taxi. We'll get back to you shortly to confirm your booking.
+          </DialogDescription>
+        </DialogHeader>
         <div className="mt-6">
           <BookingForm />
         </div>
